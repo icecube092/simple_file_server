@@ -1,0 +1,12 @@
+import http.client
+with open(file, "rb") as f:
+    data = f.read()
+conn = http.client.HTTPConnection(host: port)
+conn.request("POST", "", body=data, headers={"method": "upload", "filename": "test"})
+response = conn.getresponse()
+print(response.status, response.reason)
+
+data = response.read()
+print(data)
+
+conn.close()
