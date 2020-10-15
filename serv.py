@@ -2,6 +2,7 @@ import configparser
 import hashlib
 import http
 import os
+import random
 import sys
 from http import server
 
@@ -41,7 +42,7 @@ class HttpProcessor(server.BaseHTTPRequestHandler):
         :param filename: переданное название файла
         :param data: байт-код с данными файла
         """
-        name = hashlib.sha1(filename.encode("utf-8")).hexdigest()
+        name = hashlib.sha1(str(random.randint(1, 1000000)).encode("utf-8")).hexdigest()
         if not os.path.exists(f"store/{name[:2]}"):
             os.mkdir(f"store/{name[:2]}")
         with open(f"store/{name[:2]}/{name}.txt", "wb") as file:
